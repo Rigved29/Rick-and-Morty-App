@@ -13,6 +13,7 @@ const AllCharacters = () => {
     const [page, setPage] = useState<number>(1); // state for number of page being fetched from api (using for infinite scrolling)
     const [error, setError] = useState<boolean>(false); // state for assigning error and showing user backup msg if error comes.
     const [searchValue, setSearchValue] = useState<string>(''); // state for character name searched
+    const [maxPage, setMaxPage] = useState<number>(1); //state for saving maximum available pages for characters data, to stop fetching when pages reached maximum.
 
     const { filterType, filterValue } = useContext(dataContext); // getting values from context
 
@@ -24,6 +25,7 @@ const AllCharacters = () => {
 
                 const resObj = await response.json();
 
+
                 setIsLoading(false);
 
                 let arr: any[];
@@ -34,6 +36,11 @@ const AllCharacters = () => {
                     setAllCharacters((prevState: any) => [...prevState, ...arr]);
                     setFilteredCharacters((prevState: any) => [...prevState, ...arr]);
                     // setting state for allCharacters and filteredCharacters
+
+                    if (!resObj.info.prev) {
+                        setMaxPage(resObj.info.pages)
+                    }
+
                 } else if (!response.ok) {
                     throw new Error("Sorry not stable internet connection");
                 }
@@ -43,7 +50,9 @@ const AllCharacters = () => {
             }
         };
 
-        getAllCharacters(); // calling function for fetching characters data
+
+        if (page <= maxPage) getAllCharacters(); // calling function for fetching characters data
+
     }, [page]);
 
     useEffect(() => {
@@ -94,10 +103,13 @@ const AllCharacters = () => {
 
     }, [filterValue])
 
+
+
+
     const handleScroll = () => {
         if (
             window.innerHeight + document.documentElement.scrollTop >=
-            document.documentElement.offsetHeight
+            (document.documentElement.offsetHeight - 2)
         ) {
             setPage((prevState: number) => prevState + 1);
         }
@@ -106,6 +118,7 @@ const AllCharacters = () => {
     };
 
     useEffect(() => {
+
         //attached event 
         window.addEventListener('scroll', handleScroll);
         return () => {
@@ -126,6 +139,7 @@ const AllCharacters = () => {
             {filteredCharacters?.length > 0 && <section className={styles.cardsSec}>
                 {filteredCharacters.map((el: any, i: number) => <CharacterCard cardData={el} key={i} />)}
             </section>}
+            {!error && !isLoading && page >= maxPage && <p className={styles.backUptext}>That's it, No More Characters</p>}
         </main>
     )
 }
