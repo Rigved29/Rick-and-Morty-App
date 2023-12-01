@@ -8,6 +8,8 @@ type Props = {
     searchValue: string;
 }
 
+//component containing filters and character search bar
+
 const SearchFilterHeader = (props: Props) => {
     // const [filterType, setFilterType] = useState('');
     const { setSearchValue, searchValue } = props;
@@ -33,6 +35,10 @@ const SearchFilterHeader = (props: Props) => {
                     <option value='type'>type</option>
                 </select>
                 <FilterTypeInput filterType={filterType} />
+                {filterType.length > 0 && <span className={styles.removeFilterSpan} onClick={() => {
+                    updateFilterType('')
+                    updateFilterValue('');
+                }}>X</span>}
             </div>
             <input type="text" name="character" placeholder='Search Character' value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
         </div>

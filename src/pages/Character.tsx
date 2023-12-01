@@ -10,6 +10,8 @@ type Props = {
 
 const DeatilsCard = (props: Props) => {
 
+    // component for location details
+
     const { locationDetails } = props;
 
 
@@ -31,12 +33,14 @@ const DeatilsCard = (props: Props) => {
     )
 }
 
+//Component for particular character
+
 const Character = () => {
-    const [episodeNames, setEpisodesNames] = useState<string[]>([]);
-    const [character, setCharacter] = useState<any>(null);
-    const [locationDetails, setLocationDetails] = useState<any>(null);
-    const [error, setError] = useState<boolean>(false);
-    const params: any = useParams();
+    const [episodeNames, setEpisodesNames] = useState<string[]>([]); //state for saving episodesNames
+    const [character, setCharacter] = useState<any>(null); // state for saving character value
+    const [locationDetails, setLocationDetails] = useState<any>(null); // state for saving location details
+    const [error, setError] = useState<boolean>(false); // for checing error , if it comes
+    const params: any = useParams(); // using params to get id of character
 
     const { id } = params;
 
@@ -45,36 +49,29 @@ const Character = () => {
         const getACharacter = async () => {
 
             try {
-                console.log("running...");
                 const response = await fetch(`https://rickandmortyapi.com/api/character/${id}`);
-
-                console.log(response);
 
                 const resObj = await response.json();
 
-                let rslt;
-
-                console.log(response, resObj);
+                let charRslt;
 
                 if (response.ok) {
-                    rslt = resObj;
+                    charRslt = resObj;
 
-                    const locationRes = await fetch(rslt.location.url);
+                    const locationRes = await fetch(charRslt.location.url);
                     const locationObj = await locationRes.json();
 
-                    console.log('line41', locationObj);
-
                     if (locationRes.ok) {
-                        setLocationDetails(locationObj);
+                        setLocationDetails(locationObj); // setting location details
                     }
 
-                    setCharacter(rslt);
+                    setCharacter(charRslt); // setting character data
 
-                    if (rslt?.episode?.length > 0) {
+                    if (charRslt?.episode?.length > 0) {
 
                         let episodeUrl = `https://rickandmortyapi.com/api/episode/`
 
-                        rslt.episode.forEach((ep: any, i: number) => {
+                        charRslt.episode.forEach((ep: any, i: number) => {
 
                             const epNumber = ep.split('/').slice(-1)[0];
                             if (i === 0) {
@@ -83,19 +80,19 @@ const Character = () => {
                                 episodeUrl += `,${epNumber}`;
                             }
 
-                            console.log('line84', episodeUrl)
-
-                        });
+                        }); // creating multiple episdoes url
 
                         const episodes = await fetch(episodeUrl);
                         const episodesArr = await episodes.json();
+
+                        // here using multiple episodes url, to get data of multiple episodes in single request only so that we can get episodes name
 
                         if (episodesArr.length > 0) {
                             const episodeNames = episodesArr.map((ep: any) => ep.name);
                             setEpisodesNames(episodeNames);
                         } else {
                             setEpisodesNames([episodesArr.name]);
-                        }
+                        } //setting episodes names
 
 
 
@@ -105,12 +102,11 @@ const Character = () => {
                     throw new Error("Sorry not stable internet connection");
                 }
             } catch (err) {
-                console.log(`I think your internet is not working: ${err}`);
                 setError(true);
             }
         };
 
-        getACharacter();
+        getACharacter(); // calling function for fetching a particular character
     }, []);
 
     if (error) {
@@ -151,7 +147,7 @@ const Character = () => {
                 <div className={styles.episodeDiv}>
                     <h2>Episodes in which Character is featured in</h2>
                     <div>
-                        {episodeNames.map((ep) => <div className={styles.chip}>{ep}</div>)}
+                        {episodeNames.map((ep, i) => <div className={styles.chip} key={i}>{ep}</div>)}
                     </div>
 
                 </div>

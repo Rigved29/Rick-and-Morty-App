@@ -1,5 +1,7 @@
 import React, { createContext, useState } from 'react';
 
+//context for the app, mainly using for filterType and filterValue, Since they are being used in many components.
+
 type contextType = {
     filterType: string;
     filterValue: any;

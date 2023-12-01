@@ -1,11 +1,12 @@
 import styles from './card.module.css';
 import { Link } from "react-router-dom";
 
-// const cardData: any = { id: 167, name: "Izzy", status: "Alive", species: "Animal", type: "Cat", gender: "unknown", origin: { name: "Earth (Replacement Dimension)", url: "https://rickandmortyapi.com/api/location/20" }, location: { name: "Earth (Replacement Dimension)", url: "https://rickandmortyapi.com/api/location/20" }, image: "https://rickandmortyapi.com/api/character/avatar/167.jpeg", episode: ["https://rickandmortyapi.com/api/episode/24"], url: "https://rickandmortyapi.com/api/character/167", created: "2017-12-29T17:07:59.024Z" };
 
 type Props = {
     cardData: any;
 }
+
+//It is a card component , we are using in grid of characters
 
 const CharacterCard = (props: Props) => {
 

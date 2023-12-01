@@ -25,10 +25,22 @@
     padding: 5px;
 }
 
+.searchFilterContainer .filterDiv .removeFilterSpan {
+    margin-block: auto;
+    font-size: 1.5rem;
+    color: white;
+    border: 1px solid white;
+    border-radius: 50px;
+    padding: 1px 10px;
+    cursor: pointer;
+
+}
+
 .searchFilterContainer .filterDiv .spanDiv {
     width: auto;
     display: flex;
     height: auto;
+    overflow-x: auto;
 }
 
 .searchFilterContainer .filterDiv .spanDiv span {
@@ -65,5 +77,24 @@
 @media screen and (max-width: 600px) {
     .searchFilterContainer {
         margin-inline: 10px;
+        flex-direction: column-reverse;
+    }
+
+    .searchFilterContainer .filterDiv {
+        margin-top: 10px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .searchFilterContainer .filterDiv input {
+        width: 30%;
+    }
+
+    .searchFilterContainer .filterDiv .spanDiv span {
+        padding: 0.5rem 0.5rem;
+        border-radius: 18px;
+        margin-inline: 3px;
+        cursor: pointer;
+        font-size: small;
     }
 }

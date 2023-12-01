@@ -5,6 +5,8 @@ import Character from "./pages/Character";
 
 const RoutesComp = () => {
 
+    // All the routes defined here using Routes and Route
+
     return (
         <>
             <Routes>

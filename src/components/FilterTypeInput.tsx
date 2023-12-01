@@ -17,6 +17,8 @@ const FilterTypeInput = (props: Props) => {
         }
     }
 
+    //A dynamic component for rendering filter field as per filterType
+
     const renderFilterType = (filterType: string) => {
 
         switch (filterType) {
@@ -25,7 +27,7 @@ const FilterTypeInput = (props: Props) => {
                     <div className={styles.spanDiv}>
                         <span onClick={() => updateFilterValue('Alive')} className={filterValue === 'Alive' ? styles.active : ''}>Alive</span>
                         <span onClick={() => updateFilterValue('Dead')} className={filterValue === 'Dead' ? styles.active : ''}>Dead</span>
-                        <span onClick={() => updateFilterValue('Unkown')} className={filterValue === 'Unkown' ? styles.active : ''}>Unkown</span>
+                        <span onClick={() => updateFilterValue('Unknown')} className={filterValue === 'Unknown' ? styles.active : ''}>Unknown</span>
                     </div>);
             case 'species':
             case 'type':
@@ -36,9 +38,9 @@ const FilterTypeInput = (props: Props) => {
             case 'gender':
                 return (<div className={styles.spanDiv}>
                     <span onClick={() => updateFilterValue('Male')} className={filterValue === 'Male' ? styles.active : ''}>Male</span>
-                    <span onClick={() => updateFilterValue('Female')} className={filterValue === 'FeMale' ? styles.active : ''}>Female</span>
+                    <span onClick={() => updateFilterValue('Female')} className={filterValue === 'Female' ? styles.active : ''}>Female</span>
                     <span onClick={() => updateFilterValue('Genderless')} className={filterValue === 'Genderless' ? styles.active : ''}>Genderless</span>
-                    <span onClick={() => updateFilterValue('unknown')} className={filterValue === 'unkown' ? styles.active : ''}>unknown</span>
+                    <span onClick={() => updateFilterValue('unknown')} className={filterValue === 'unknown' ? styles.active : ''}>unknown</span>
                 </div>)
             default:
                 return <></>;
