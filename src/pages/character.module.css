@@ -1,0 +1,121 @@
+section .charName {
+    margin-top: 6rem;
+    color: white;
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+}
+
+.characterContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    box-sizing: border-box;
+    padding-inline: 20px;
+    justify-content: space-around;
+    gap: 0;
+}
+
+.characterContainer .characterDiv {
+    padding: 10px;
+}
+
+.characterContainer .characterDiv img {
+    width: 400px;
+    height: auto;
+    border-radius: 20px;
+}
+
+.characterContainer .characterDiv p {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.characterContainer .characterDiv p:hover {
+    color: rgb(255, 152, 0);
+}
+
+.characterContainer .characterInfoDiv {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    padding: 10px;
+}
+
+.characterContainer .characterInfoDiv .row {
+    color: rgb(158, 158, 158);
+    font-size: 1rem;
+    font-weight: 500;
+    margin-block: 10px;
+    text-align: left;
+}
+
+.characterContainer .characterInfoDiv .row .value {
+    color: white;
+}
+
+.characterContainer .characterInfoDiv .detailsDiv {
+    background-color: rgb(60, 62, 68);
+    padding: 10px;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
+.characterContainer .characterInfoDiv .detailsDiv h2 {
+    text-align: left;
+    color: white;
+}
+
+section .episodeDiv {
+    background-color: rgb(60, 62, 68);
+    padding: 10px;
+    border-radius: 20px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin: 20px;
+}
+
+section .episodeDiv h2 {
+    text-align: left;
+    color: white;
+    margin-inline: 5px;
+    margin-bottom: 10px;
+}
+
+section .episodeDiv div {
+    height: auto;
+    margin-block: 5px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+section .episodeDiv div .chip {
+    color: white;
+    border: 1px solid white;
+    background-color: transparent;
+    border-radius: 20px;
+    padding: 0.5rem 0.5rem;
+    margin-inline: 5px;
+}
+
+@media screen and (max-width: 700px) {
+    .characterContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .characterContainer .characterDiv img {
+        width: 100%;
+    }
+
+    .characterContainer .characterInfoDiv {
+        width: auto;
+    }
+
+
+}
